@@ -1,7 +1,11 @@
+import { useQuery } from "@apollo/client";
 import React from "react";
 import Image1 from "../../Assets/macaroni.png";
+import { getRecipeList } from "../../Models/Home";
 
 const Home = () => {
+  const { data } = useQuery(getRecipeList);
+
   return (
     <div className="container-fluid">
       <div className="container">
@@ -9,7 +13,7 @@ const Home = () => {
       </div>
       <div className="container">
         <div className="row">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => {
+          {data?.recipe.map((d, i) => {
             return (
               <div
                 className="position-relative col-4 mt-3 mx-auto"
@@ -20,7 +24,7 @@ const Home = () => {
                   className="position-absolute bottom-0 ms-4 mb-4"
                   style={{ color: "white" }}
                 >
-                  Macaroni el salvador
+                  {d.title}
                 </h4>
               </div>
             );
