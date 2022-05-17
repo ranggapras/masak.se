@@ -25,6 +25,17 @@ const getRecipeByIdUser = gql`
     }
   }
 `;
+const addBookmark = gql`
+  mutation addBookmark($id: uuid!) {
+    insert_bookmark(objects: {idRecipe: "850c0d6d-b2fc-46b8-9ecc-218fb6d71e54", idUser: "e615324c-7077-4e95-b40f-a61ed49d847f"}) {
+      returning {
+        id
+        idRecipe
+        idUser
+      }
+    }
+  }
+`;
 
 const deleteBookmarkList = gql`
   mutation deleteBookmarkList($id: uuid!) {
@@ -36,4 +47,4 @@ const deleteBookmarkList = gql`
   }
 `;
 
-export { getBookmarkList,getRecipeByIdUser, deleteBookmarkList };
+export { getBookmarkList, getRecipeByIdUser,addBookmark, deleteBookmarkList };
