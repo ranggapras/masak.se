@@ -4,7 +4,7 @@ import Image1 from "../../Assets/macaroni.png";
 const CardRecipe = ({ data }) => {
   return (
     <div
-      className="position-relative col-4 my-3 mx-4"
+      className="position-relative col-4 col-sm-6 my-3 mx-3"
       style={{ width: "auto" }}
     >
       <img src={Image1} class="img-thumbnail rounded" alt="..." />

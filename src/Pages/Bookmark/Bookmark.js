@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
 import React from "react";
-import Image1 from "../../Assets/macaroni.png";
 import CardRecipe from "../../Components/CardRecipe/CardRecipe";
 import {
   deleteBookmarkList,
@@ -25,7 +24,7 @@ const Bookmark = () => {
         <p className="h1">Bookmark</p>
       </div>
       <div className="container">
-        <div className="flex-row d-flex">
+        <div className="flex-row d-flex row">
           {dataBookmark?.bookmark.map((d, i) => {
             return <CardRecipe data={d} key={i} />;
           })}
@@ -35,7 +34,7 @@ const Bookmark = () => {
         <p className="h1">Your Recipe</p>
       </div>
       <div className="container">
-        <div className="flex-row d-flex">
+        <div className="flex-row d-flex row">
           {dataRecipe?.recipe.map((d, i) => {
             return <CardRecipe data={d} key={i} />;
           })}
