@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import React from "react";
 import Image1 from "../../Assets/macaroni.png";
+import CardRecipe from "../../Components/CardRecipe/CardRecipe";
 import {
   deleteBookmarkList,
   getBookmarkList,
@@ -24,23 +25,9 @@ const Bookmark = () => {
         <p className="h1">Bookmark</p>
       </div>
       <div className="container">
-        <div className="row">
+        <div className="flex-row d-flex">
           {dataBookmark?.bookmark.map((d, i) => {
-            return (
-              <div
-                className="position-relative col-4 mt-3 mx-auto"
-                style={{ width: "auto" }}
-                key={i}
-              >
-                <img src={Image1} class="img-thumbnail rounded" alt="..." />
-                <h4
-                  className="position-absolute bottom-0 ms-4 mb-4"
-                  style={{ color: "white" }}
-                >
-                  {d.recipe.title}
-                </h4>
-              </div>
-            );
+            return <CardRecipe data={d} key={i} />;
           })}
         </div>
       </div>
@@ -48,23 +35,9 @@ const Bookmark = () => {
         <p className="h1">Your Recipe</p>
       </div>
       <div className="container">
-        <div className="row">
+        <div className="flex-row d-flex">
           {dataRecipe?.recipe.map((d, i) => {
-            return (
-              <div
-                className="position-relative col-4 mt-3 mx-auto"
-                style={{ width: "auto" }}
-                key={i}
-              >
-                <img src={Image1} class="img-thumbnail rounded" alt="..." />
-                <h4
-                  className="position-absolute bottom-0 ms-4 mb-4"
-                  style={{ color: "white" }}
-                >
-                  {d.title}
-                </h4>
-              </div>
-            );
+            return <CardRecipe data={d} key={i} />;
           })}
         </div>
       </div>
