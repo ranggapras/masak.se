@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
 
 const login = gql`
-  query login {
+  query login($username: String!, $password: String!) {
     user(
-      where: { username: { _eq: "udin.cyber48" }, password: { _eq: "123456" } }
+      where: { username: { _eq: $username }, password: { _eq: $password } }
     ) {
       id
       name
@@ -13,30 +13,19 @@ const login = gql`
   }
 `;
 const register = gql`
-  mutation register {
-    insert_user_one(
-      object: {
-        username: "sohebgb"
-        name: "soheb"
-        password: "123456"
-        phoneNumber: "081133448"
-        photo: ""
-      }
-    ) {
+  mutation register($object: user_insert_input!) {
+    insert_user_one(object: $object) {
       id
       username
       name
-      password
       phoneNumber
       photo
     }
   }
 `;
 const getUserProfileById = gql`
-  query login {
-    user(
-      where: { id: { _eq: "$id" } }
-    ) {
+  query login($id: uuid!) {
+    user(where: { id: { _eq: "$id" } }) {
       id
       name
       phoneNumber
@@ -46,15 +35,17 @@ const getUserProfileById = gql`
 `;
 
 const updateUserProfile = gql`
-mutation updateUserProfile {
-  update_user(where: {id: {_eq: "388c74f1-9e43-4c41-8a58-c4c00842f46b"}}, _set: {name: "soheb v2", phoneNumber: 990909, photo: "asd"}) {
-    returning {
-      name
-      phoneNumber
-      photo
-
+  mutation updateUserProfile {
+    update_user(
+      where: { id: { _eq: "388c74f1-9e43-4c41-8a58-c4c00842f46b" } }
+      _set: { name: "soheb v2", phoneNumber: 990909, photo: "asd" }
+    ) {
+      returning {
+        name
+        phoneNumber
+        photo
+      }
     }
   }
-}
 `;
-export { login, register,getUserProfileById,updateUserProfile };
+export { login, register, getUserProfileById, updateUserProfile };

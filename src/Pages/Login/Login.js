@@ -1,11 +1,43 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../Assets/logo.svg";
-
+import { useCookies } from "react-cookie";
+import { useLazyQuery } from "@apollo/client";
 import Button from "../../Elements/Button/Button";
 import IlluAuth from "../../Elements/IlluAuth/IlluAuth";
+import { login } from "../../Models/User";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(["isLogin", "idUser"]);
+
+  const refUsername = useRef();
+  const refPassword = useRef();
+
+  const [userLogin, { data }] = useLazyQuery(login);
+
+  useEffect(() => {
+    if (cookies.isLogin) {
+      navigate("/");
+    }
+  }, [cookies, navigate]);
+
+  useEffect(() => {
+    if (data?.user.length > 0) {
+      setCookie("isLogin", true, { path: "/" });
+      setCookie("idUser", data.user[0].id, { path: "/" });
+    }
+  }, [data, setCookie]);
+
+  const submit = () => {
+    userLogin({
+      variables: {
+        username: refUsername.current.value,
+        password: refPassword.current.value,
+      },
+    });
+  };
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -26,7 +58,7 @@ const Login = () => {
                   type="text"
                   class="form-control"
                   id="username"
-                  aria-describedby="basic-addon3"
+                  ref={refUsername}
                 />
               </div>
             </div>
@@ -39,13 +71,18 @@ const Login = () => {
                   type="password"
                   class="form-control"
                   id="password"
-                  aria-describedby="basic-addon3"
+                  ref={refPassword}
                 />
               </div>
             </div>
             <div className="d-flex justify-content-between">
               <Link to="/register">Register</Link>
-              <Button style={{ alignSelf: "flex-end" }}>Login</Button>
+              <Button
+                onClick={() => submit()}
+                style={{ alignSelf: "flex-end" }}
+              >
+                Login
+              </Button>
             </div>
           </div>
         </div>

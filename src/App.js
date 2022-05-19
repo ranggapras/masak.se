@@ -10,6 +10,7 @@ import {
 import Recipe from "./Pages/Recipe/Recipe";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
+import Profile from "./Pages/Profile/Profile";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" exact element={<Home />} />
           <Route path="/bookmark" exact element={<Bookmark />} />
           <Route path="/recipe/:id" exact element={<Recipe />} />
+          <Route path="/profile" exact element={<Profile />} />
         </Route>
       </Routes>
     </Router>

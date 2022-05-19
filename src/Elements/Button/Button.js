@@ -1,10 +1,11 @@
 import React from "react";
 
-const Button = ({ children, style }) => {
+const Button = ({ children, style, onClick }) => {
   return (
     <button
       type="button"
       class="btn"
+      onClick={onClick}
       style={{
         background: "#ffad61",
         width: "15rem",

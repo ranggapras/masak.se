@@ -1,10 +1,39 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import React, { useRef, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../Assets/logo.svg";
 import Button from "../../Elements/Button/Button";
 import IlluAuth from "../../Elements/IlluAuth/IlluAuth";
+import { register } from "../../Models/User";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const refUsername = useRef();
+  const refPassword = useRef();
+  const refHandphone = useRef();
+  const refName = useRef();
+
+  const [registerUser, { data }] = useMutation(register);
+
+  useEffect(() => {
+    if (data?.insert_user_one) {
+      navigate("/login");
+    }
+  }, [data, navigate]);
+
+  const submitRegister = () => {
+    registerUser({
+      variables: {
+        object: {
+          username: refUsername?.current.value,
+          password: refPassword?.current.value,
+          phoneNumber: refHandphone?.current.value,
+          name: refName?.current.value,
+        },
+      },
+    });
+  };
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -17,15 +46,15 @@ const Register = () => {
           <div className="d-flex flex-column" style={{ width: "30rem" }}>
             <h1 className="mb-5">Register</h1>
             <div className="d-flex flex-column mb-3">
-              <label for="username" class="form-label">
+              <label for="name" class="form-label">
                 Nama
               </label>
               <div class="input-group mb-3">
                 <input
                   type="text"
                   class="form-control"
-                  id="username"
-                  aria-describedby="basic-addon3"
+                  id="name"
+                  ref={refName}
                 />
               </div>
             </div>
@@ -38,20 +67,20 @@ const Register = () => {
                   type="text"
                   class="form-control"
                   id="username"
-                  aria-describedby="basic-addon3"
+                  ref={refUsername}
                 />
               </div>
             </div>
             <div className="d-flex flex-column mb-3">
-              <label for="username" class="form-label">
+              <label for="hanphone" class="form-label">
                 No Handphone
               </label>
               <div class="input-group mb-3">
                 <input
                   type="number"
                   class="form-control"
-                  id="username"
-                  aria-describedby="basic-addon3"
+                  id="hanphone"
+                  ref={refHandphone}
                 />
               </div>
             </div>
@@ -64,13 +93,18 @@ const Register = () => {
                   type="password"
                   class="form-control"
                   id="password"
-                  aria-describedby="basic-addon3"
+                  ref={refPassword}
                 />
               </div>
             </div>
             <div className="d-flex justify-content-between">
               <Link to="/login">Login</Link>
-              <Button style={{ alignSelf: "flex-end" }}>Daftar</Button>
+              <Button
+                onClick={() => submitRegister()}
+                style={{ alignSelf: "flex-end" }}
+              >
+                Daftar
+              </Button>
             </div>
           </div>
         </div>
