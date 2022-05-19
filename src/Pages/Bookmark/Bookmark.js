@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import CardRecipe from "../../Components/CardRecipe/CardRecipe";
 import {
   deleteBookmarkList,
@@ -9,8 +10,20 @@ import {
 } from "../../Models/Bookmark";
 
 const Bookmark = () => {
-  const { data: dataBookmark } = useQuery(getBookmarkList);
-  const { data: dataRecipe } = useQuery(getRecipeByIdUser);
+  const [cookies] = useCookies(["idUser"]);
+
+  const { data: dataBookmark, refetch: refectBookmark } = useQuery(
+    getBookmarkList,
+    {
+      variables: { id: cookies.idUser },
+    }
+  );
+  const { data: dataRecipe, refetch: refectRecipe } = useQuery(
+    getRecipeByIdUser,
+    {
+      variables: { id: cookies.idUser },
+    }
+  );
   const navigate = useNavigate();
 
   const [deleteBookmark] = useMutation(deleteBookmarkList, {
@@ -19,6 +32,11 @@ const Bookmark = () => {
   const doDelete = (id) => {
     deleteBookmark({ variables: { id: id } });
   };
+
+  useEffect(() => {
+    refectRecipe();
+    refectBookmark();
+  });
 
   return (
     <div className="container-fluid">
@@ -30,6 +48,8 @@ const Bookmark = () => {
           {dataBookmark?.bookmark.map((d, i) => {
             return (
               <CardRecipe
+                onClickAction={() => doDelete(d.id)}
+                bookmark={true}
                 data={d}
                 key={i}
                 onClick={() =>

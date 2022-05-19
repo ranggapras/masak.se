@@ -1,10 +1,8 @@
 import { gql } from "@apollo/client";
 
 const getBookmarkList = gql`
-  query getBookmarkList {
-    bookmark(
-      where: { idUser: { _eq: "e615324c-7077-4e95-b40f-a61ed49d847f" } }
-    ) {
+  query getBookmarkList($id: uuid!) {
+    bookmark(where: { idUser: { _eq: $id } }) {
       id
       idRecipe
       idUser
@@ -17,8 +15,8 @@ const getBookmarkList = gql`
   }
 `;
 const getRecipeByIdUser = gql`
-  query getRecipeByIdUser {
-    recipe(where: { idUser: { _eq: "e615324c-7077-4e95-b40f-a61ed49d847f" } }) {
+  query getRecipeByIdUser($id: uuid!) {
+    recipe(where: { idUser: { _eq: $id } }) {
       id
       title
       photo
@@ -26,8 +24,8 @@ const getRecipeByIdUser = gql`
   }
 `;
 const addBookmark = gql`
-  mutation addBookmark($id: uuid!) {
-    insert_bookmark(objects: {idRecipe: "850c0d6d-b2fc-46b8-9ecc-218fb6d71e54", idUser: "e615324c-7077-4e95-b40f-a61ed49d847f"}) {
+  mutation addBookmark($idRecipe: uuid!, $idUser: uuid!) {
+    insert_bookmark(objects: { idRecipe: $idRecipe, idUser: $idUser }) {
       returning {
         id
         idRecipe
@@ -47,4 +45,4 @@ const deleteBookmarkList = gql`
   }
 `;
 
-export { getBookmarkList, getRecipeByIdUser,addBookmark, deleteBookmarkList };
+export { getBookmarkList, getRecipeByIdUser, addBookmark, deleteBookmarkList };

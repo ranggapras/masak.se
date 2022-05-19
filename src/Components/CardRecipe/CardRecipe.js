@@ -1,13 +1,29 @@
 import React from "react";
+import { FaTrash } from "react-icons/fa";
 
-const CardRecipe = ({ data, onClick }) => {
+const CardRecipe = ({ data, onClick, onClickAction, bookmark }) => {
   return (
     <div
       className="position-relative col-4 col-sm-6 my-3 mx-3"
       style={{ width: "auto", cursor: "pointer" }}
-      onClick={onClick}
     >
+      {bookmark && (
+        <div
+          onClick={onClickAction}
+          className="d-flex align-items-center justify-content-center position-absolute end-0 rounded-circle"
+          style={{
+            cursor: "pointer",
+            background: "#fff",
+            width: "3rem",
+            height: "3rem",
+            margin: "1rem 2rem",
+          }}
+        >
+          <FaTrash color="#F92222" size={25} />
+        </div>
+      )}
       <img
+        onClick={onClick}
         src={data.photo || data.recipe.photo}
         class="img-thumbnail rounded"
         alt="..."
