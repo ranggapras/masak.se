@@ -1,10 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import todoSlice from "../Pages/Home/slicer";
+import recipeSlicer from "../Pages/Home/slicer";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 const reducers = combineReducers({
-  todo: todoSlice,
+  recipe: recipeSlicer,
 });
 
 const persistConfig = {

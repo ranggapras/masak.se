@@ -7,6 +7,7 @@ import { useState } from "react";
 import { NavbarData } from "./NavbarData";
 import { Cookies } from "react-cookie";
 import { IconContext } from "react-icons";
+
 import Logo from "../../Assets/logo.svg";
 import SearchIcon from "../../Assets/search.svg";
 
@@ -19,7 +20,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const search = () => {
-    console.log(refSearch.current.value);
+    navigate(`/?search=${refSearch.current.value}`);
   };
 
   const logout = () => {
@@ -34,16 +35,16 @@ const Navbar = () => {
     <div className="d-flex align-items-center">
       <IconContext.Provider value={{ color: "#9D763C" }}>
         <div className="navbar">
-          <Link to="#" className="menu-bars">
+          <button className="menu-bars">
             <FaBars onClick={showSidebar} />
-          </Link>
+          </button>
         </div>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items" onClick={showSidebar}>
             <li>
-              <Link to="#" className="menu-bars">
+              <button className="menu-bars">
                 <AiOutlineClose />
-              </Link>
+              </button>
             </li>
             {NavbarData.map((d, i) => {
               return (
