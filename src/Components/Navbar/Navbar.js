@@ -5,6 +5,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import { NavbarData } from "./NavbarData";
 import { IconContext } from "react-icons";
+import Logo from "../../Assets/logo.svg";
+import SearchIcon from "../../Assets/search.svg";
 
 import "./style.css";
 
@@ -14,8 +16,8 @@ const Navbar = () => {
   const showSidebar = () => setSidebar(!sidebar);
 
   return (
-    <>
-      <IconContext.Provider value={{ color: "#fff" }}>
+    <div className="d-flex align-items-center">
+      <IconContext.Provider value={{ color: "#9D763C" }}>
         <div className="navbar">
           <Link to="#" className="menu-bars">
             <FaBars onClick={showSidebar} />
@@ -38,7 +40,23 @@ const Navbar = () => {
           </ul>
         </nav>
       </IconContext.Provider>
-    </>
+      <div>
+        <img
+          src={Logo}
+          style={{ marginLeft: "5rem", height: "4rem" }}
+          alt="logo"
+        />
+      </div>
+      <div style={{ border: ".2rem solid #FFAD61", borderRadius: "2rem" }}>
+        <input
+          style={{
+            width: "30rem",
+            border: "none",
+          }}
+        ></input>
+        <img src={SearchIcon} />
+      </div>
+    </div>
   );
 };
 

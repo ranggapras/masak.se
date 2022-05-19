@@ -1,5 +1,4 @@
 .navbar {
-  background-color: #ffad61;
   height: 80px;
   display: flex;
   justify-content: flex-start;
@@ -77,4 +76,9 @@ span {
 
 li {
   list-style: none;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
 }
