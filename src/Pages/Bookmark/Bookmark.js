@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import CardRecipe from "../../Components/CardRecipe/CardRecipe";
 import {
   deleteBookmarkList,
@@ -10,6 +11,7 @@ import {
 const Bookmark = () => {
   const { data: dataBookmark } = useQuery(getBookmarkList);
   const { data: dataRecipe } = useQuery(getRecipeByIdUser);
+  const navigate = useNavigate();
 
   const [deleteBookmark] = useMutation(deleteBookmarkList, {
     refetchQueries: [getBookmarkList],
@@ -26,7 +28,13 @@ const Bookmark = () => {
       <div className="container">
         <div className="flex-row d-flex row">
           {dataBookmark?.bookmark.map((d, i) => {
-            return <CardRecipe data={d} key={i} />;
+            return (
+              <CardRecipe
+                data={d}
+                key={i}
+                onClick={() => navigate(`/recipe/${d.id}`, { replace: true })}
+              />
+            );
           })}
         </div>
       </div>
@@ -36,7 +44,13 @@ const Bookmark = () => {
       <div className="container">
         <div className="flex-row d-flex row">
           {dataRecipe?.recipe.map((d, i) => {
-            return <CardRecipe data={d} key={i} />;
+            return (
+              <CardRecipe
+                data={d}
+                key={i}
+                onClick={() => navigate(`/recipe/${d.id}`, { replace: true })}
+              />
+            );
           })}
         </div>
       </div>
