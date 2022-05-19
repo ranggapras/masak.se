@@ -5,6 +5,7 @@ import { BiLogOut } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import { NavbarData } from "./NavbarData";
+import Button from "../../Elements/Button/Button";
 import { Cookies } from "react-cookie";
 import { IconContext } from "react-icons";
 
@@ -32,7 +33,7 @@ const Navbar = () => {
   const showSidebar = () => setSidebar(!sidebar);
 
   return (
-    <div className="d-flex align-items-center">
+    <div className="d-flex align-items-center justify-content-between">
       <IconContext.Provider value={{ color: "#9D763C" }}>
         <div className="navbar">
           <button className="menu-bars">
@@ -59,34 +60,40 @@ const Navbar = () => {
           </ul>
         </nav>
       </IconContext.Provider>
-      <div>
-        <img
-          src={Logo}
-          style={{ marginLeft: "5rem", height: "4rem" }}
-          alt="logo"
-        />
-      </div>
       <div
-        style={{
-          border: ".2rem solid #FFAD61",
-          borderRadius: "2rem",
-          padding: "0 1rem",
-        }}
+        className="d-flex align-items-center justify-content-between"
+        style={{ width: "67.5vw" }}
       >
-        <input
+        <div>
+          <img
+            src={Logo}
+            style={{ marginLeft: "5rem", height: "4rem" }}
+            alt="logo"
+          />
+        </div>
+        <div
           style={{
-            width: "30rem",
-            border: "none",
+            border: ".2rem solid #FFAD61",
+            borderRadius: "2rem",
+            padding: "0 1rem",
           }}
-          ref={refSearch}
-        ></input>
-        <img
-          onClick={() => search()}
-          alt="..."
-          src={SearchIcon}
-          style={{ width: "1.5rem", margin: ".5rem 0", cursor: "pointer" }}
-        />
+        >
+          <input
+            style={{
+              width: "30rem",
+              border: "none",
+            }}
+            ref={refSearch}
+          ></input>
+          <img
+            onClick={() => search()}
+            alt="..."
+            src={SearchIcon}
+            style={{ width: "1.5rem", margin: ".5rem 0", cursor: "pointer" }}
+          />
+        </div>
       </div>
+      <Button style={{ margin: "0 2rem" }}>Add Recipe</Button>
     </div>
   );
 };
