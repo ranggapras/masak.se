@@ -66,8 +66,9 @@ const Navbar = () => {
       >
         <div>
           <img
+            onClick={() => navigate("/")}
             src={Logo}
-            style={{ marginLeft: "5rem", height: "4rem" }}
+            style={{ marginLeft: "5rem", height: "4rem", cursor: "pointer" }}
             alt="logo"
           />
         </div>
@@ -93,7 +94,12 @@ const Navbar = () => {
           />
         </div>
       </div>
-      <Button style={{ margin: "0 2rem" }}>Add Recipe</Button>
+      <Button
+        onClick={() => navigate("/recipe/add")}
+        style={{ margin: "0 2rem" }}
+      >
+        Add Recipe
+      </Button>
     </div>
   );
 };

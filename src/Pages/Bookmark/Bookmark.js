@@ -70,7 +70,9 @@ const Bookmark = () => {
               <CardRecipe
                 data={d}
                 key={i}
-                onClick={() => navigate(`/recipe/${d.id}`, { replace: true })}
+                onClick={() =>
+                  navigate(`/recipe/add?id=${d.id}`, { replace: true })
+                }
               />
             );
           })}

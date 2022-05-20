@@ -25,7 +25,8 @@ const CardRecipe = ({ data, onClick, onClickAction, bookmark }) => {
       <img
         onClick={onClick}
         src={data.photo || data.recipe.photo}
-        class="img-thumbnail rounded"
+        style={{ objectFit: "cover", width: "23.75rem", height: "20rem" }}
+        class="img rounded-5"
         alt="..."
       />
       <h4

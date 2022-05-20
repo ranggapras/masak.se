@@ -103,7 +103,7 @@ const Register = () => {
                 onClick={() => submitRegister()}
                 style={{ alignSelf: "flex-end" }}
               >
-                Daftar
+                Register
               </Button>
             </div>
           </div>

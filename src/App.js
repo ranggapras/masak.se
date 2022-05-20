@@ -15,6 +15,7 @@ import Recipe from "./Pages/Recipe/Recipe";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
 import Profile from "./Pages/Profile/Profile";
+import AddRecipe from "./Pages/AddRecipe/AddRecipe";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path="/bookmark" exact element={<Bookmark />} />
               <Route path="/recipe/:id" exact element={<Recipe />} />
               <Route path="/profile" exact element={<Profile />} />
+              <Route path="/recipe/add" exact element={<AddRecipe />} />
             </Route>
           </Routes>
         </Router>

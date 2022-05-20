@@ -12,9 +12,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ApolloProvider client={client}>
     <CookiesProvider>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
+      <App />
     </CookiesProvider>
   </ApolloProvider>
 );
