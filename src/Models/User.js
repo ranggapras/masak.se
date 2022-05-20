@@ -25,8 +25,9 @@ const register = gql`
 `;
 const getUserProfileById = gql`
   query login($id: uuid!) {
-    user(where: { id: { _eq: "$id" } }) {
+    user(where: { id: { _eq: $id } }) {
       id
+      username
       name
       phoneNumber
       photo
