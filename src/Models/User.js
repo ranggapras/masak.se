@@ -24,7 +24,7 @@ const register = gql`
   }
 `;
 const getUserProfileById = gql`
-  query login($id: uuid!) {
+  query getUserProfile($id: uuid!) {
     user(where: { id: { _eq: $id } }) {
       id
       username
@@ -36,10 +36,21 @@ const getUserProfileById = gql`
 `;
 
 const updateUserProfile = gql`
-  mutation updateUserProfile {
+  mutation updateUserProfile(
+    $id: uuid!
+    $name: String
+    $phoneNumber: String
+    $photo: String
+    $username: String
+  ) {
     update_user(
-      where: { id: { _eq: "388c74f1-9e43-4c41-8a58-c4c00842f46b" } }
-      _set: { name: "soheb v2", phoneNumber: 990909, photo: "asd" }
+      where: { id: { _eq: $id } }
+      _set: {
+        name: $name
+        phoneNumber: $phoneNumber
+        photo: $photo
+        username: $username
+      }
     ) {
       returning {
         name

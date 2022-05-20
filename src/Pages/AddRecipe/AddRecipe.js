@@ -43,7 +43,6 @@ const AddRecipe = () => {
 
   const handlePhoto = (e) => {
     e.preventDefault();
-    console.log(e);
     const file = e.target?.files[0];
     const storageRef = ref(storage, `menu/${file.name}`);
     uploadBytes(storageRef, file).then((snapshot) => {
@@ -60,6 +59,8 @@ const AddRecipe = () => {
           ...form,
         },
       },
+    }).then(() => {
+      navigate("/");
     });
   };
 
